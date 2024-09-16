@@ -1,15 +1,29 @@
-import { useEffect, useState } from "react";
+// src/pages/Directors.js
+import React, { useEffect, useState } from 'react';
 
-function Directors() {
+const Directors = () => {
+  const [directors, setDirectors] = useState([]);
+
+  useEffect(() => {
+    fetch('/directors') // Assuming you have a /directors endpoint
+      .then(response => response.json())
+      .then(data => setDirectors(data));
+  }, []);
+
   return (
-    <>
-      <header>
-        {/* What component should go here? */}
-      </header>
-      <main>
-        {/* Director info here! */}
-      </main>
-    </>
+    <div>
+      <h1>Directors Page</h1>
+      {directors.map(director => (
+        <article key={director.id}>
+          <h2>{director.name}</h2>
+          <ul>
+            {director.movies.map((movie, index) => (
+              <li key={index}>{movie}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
   );
 };
 
