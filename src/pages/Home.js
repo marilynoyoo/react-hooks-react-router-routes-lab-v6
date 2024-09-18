@@ -1,24 +1,32 @@
-// src/pages/Home.js
-import React, { useEffect, useState } from 'react';
-import MovieCard from '../components/MovieCard';
+import { useEffect, useState } from "react";
+import NavBar from "../components/NavBar";
+import MovieCard from "../components/MovieCard";
 
-const Home = () => {
+function Home() {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch('/movies') // Assuming you have a /movies endpoint
-      .then(response => response.json())
-      .then(data => setMovies(data));
+    fetch("http://localhost:4000/movies")
+      .then((response) => response.json())
+      .then((data) => setMovies(data))
+      .catch((error) => console.error("Error fetching movies:", error));
   }, []);
 
   return (
-    <div>
-      <h1>Home Page</h1>
-      {movies.map(movie => (
-        <MovieCard key={movie.id} movie={movie} />
-      ))}
-    </div>
+    <>
+      <header>
+        <NavBar />
+      </header>
+      <main>
+        <h1>Home Page</h1>
+        <div>
+          {movies.map((movie) => (
+            <MovieCard key={movie.id} id={movie.id} title={movie.title} />
+          ))}
+        </div>
+      </main>
+    </>
   );
-};
+}
 
 export default Home;

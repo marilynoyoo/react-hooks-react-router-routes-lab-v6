@@ -1,30 +1,40 @@
-// src/pages/Directors.js
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import NavBar from "../components/NavBar";
 
-const Directors = () => {
+function Directors() {
   const [directors, setDirectors] = useState([]);
 
   useEffect(() => {
-    fetch('/directors') // Assuming you have a /directors endpoint
-      .then(response => response.json())
-      .then(data => setDirectors(data));
+    fetch("http://localhost:4000/directors")
+      .then((response) => response.json())
+      .then((data) => setDirectors(data))
+      .catch((error) => console.error("Error fetching directors:", error));
   }, []);
 
   return (
-    <div>
-      <h1>Directors Page</h1>
-      {directors.map(director => (
-        <article key={director.id}>
-          <h2>{director.name}</h2>
-          <ul>
-            {director.movies.map((movie, index) => (
-              <li key={index}>{movie}</li>
-            ))}
-          </ul>
-        </article>
-      ))}
-    </div>
+    <>
+      <header>
+        <NavBar />
+      </header>
+      <main>
+        <h1>Directors Page</h1>
+        {directors.length > 0 ? (
+          directors.map((director) => (
+            <article key={director.id}>
+              <h2>{director.name}</h2>
+              <ul>
+                {director.movies.map((movie, index) => (
+                  <li key={index}>{movie}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        ) : (
+          <p>Loading directors...</p>
+        )}
+      </main>
+    </>
   );
-};
+}
 
 export default Directors;

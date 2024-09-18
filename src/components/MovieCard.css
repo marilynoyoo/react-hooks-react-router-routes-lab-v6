@@ -1,0 +1,21 @@
+/* src/components/MovieCard.css */
+.movie-card {
+    border: 1px solid #ddd;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .movie-card h2 {
+    margin: 0 0 8px;
+  }
+  
+  .movie-card a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .movie-card a:hover {
+    text-decoration: underline;
+  }

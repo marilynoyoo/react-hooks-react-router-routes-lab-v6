@@ -1,39 +1,27 @@
-import { createBrowserRouter } from 'react-router-dom';
-import Home from './pages/Home';
-import Movie from './pages/Movie';
-import Directors from './pages/Directors';
-import Actors from './pages/Actors';
-import ErrorPage from './pages/ErrorPage';
-import NavBar from './components/NavBar';
-
-// Define a Layout component to wrap content with the NavBar
-const Layout = ({ children }) => (
-  <>
-    <NavBar />
-    {children}
-  </>
-);
+// routes.js
+import Home from "./pages/Home";
+import Directors from "./pages/Directors";
+import Actors from "./pages/Actors";
+import Movie from "./pages/Movie";
+import ErrorPage from "./pages/ErrorPage"; // Import ErrorPage for handling errors
 
 const routes = [
   {
-    path: '/',
-    element: <Layout><Home /></Layout>,
-    errorElement: <ErrorPage />,
+    path: "/",
+    element: <Home />,
+    errorElement: <ErrorPage />, // Error handling for invalid routes
   },
   {
-    path: '/directors',
-    element: <Layout><Directors /></Layout>,
-    errorElement: <ErrorPage />,
+    path: "/directors",
+    element: <Directors />,
   },
   {
-    path: '/actors',
-    element: <Layout><Actors /></Layout>,
-    errorElement: <ErrorPage />,
+    path: "/actors",
+    element: <Actors />,
   },
   {
-    path: '/movie/:id',
-    element: <Layout><Movie /></Layout>,
-    errorElement: <ErrorPage />,
+    path: "/movie/:id", // Dynamic route for movie details
+    element: <Movie />,
   },
 ];
 
